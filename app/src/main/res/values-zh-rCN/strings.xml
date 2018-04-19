@@ -1,0 +1,257 @@
+<resources>
+    <string name="app_name">扫描服务</string>
+    <!--  App Strings -->
+    <string name="action_settings">设置</string>
+    <string name="service_switch">扫描服务开关</string>
+
+    <string name="menu_settings">设置</string>
+    <string name="get_last_image">获取最后一张图像</string>
+    <string name="set_scan_key">设置扫描按键</string>
+    <string name="scan_mode">扫描模式</string>
+    <string name="image_mode">图像模式</string>
+    <string name="set_scan_key_mode">设置扫描键模式</string>
+    <string name="scan_for_picture_or_press_menu_for_options">请按扫描按键或选择菜单进行操作.\n\n</string>
+    <string name="scan_for_start_scanning_or_press_menu_for_options">按扫描键开始扫描或选择菜单进行操作.\n\n</string>
+    <string name="scan_to_set_scan_key">按扫描按键进行扫描设置.\n\n</string>
+    <string name="results_hint">数据显示</string>
+    <string name="length_hint">长度显示</string>
+    <string name="codeid_hint">CodeID显示</string>
+    <string name="aimid_hint">AimID显示</string>
+    <string name="modifier_hint">Modifier显示</string>
+    <string name="label_results">Data:</string>
+    <string name="label_length">Length:</string>
+    <string name="label_codeid">CodeID:</string>
+    <string name="label_aimid">AimID:</string>
+    <string name="label_modifier">Modifier:</string>
+    <string name="label_scan_mode">扫描模式</string>
+    <string name="label_image_mode">图像模式</string>
+    <string name="label_data_results">Data: (barcode_data)\nLength: (length)\nCodeId: (code_id)\nAimId: (aim_id)\nModifier: (modifier)</string>
+
+    <!-- Lights Settings Strings -->
+    <string name="pref_ic_lights_control_settings">扫描灯光设置</string>
+    <string name="pref_ic_illumination_on_summary">Enable/Disable Illumination</string>
+    <string name="pref_ic_illumination_on_settings">Illumination Enable</string>
+    <string name="pref_ic_aimer_on_summary">Enable/Disable Aimer</string>
+    <string name="pref_ic_aimer_on_settings">Aimer Enable</string>
+
+
+    <string name="sym_advanced_sym_setup">高级码制配置</string>
+    <string name="sym_ocr_config">OCR配置</string>
+    <string name="input_config">输入模式</string>
+    <!-- Symbology Config Strings -->
+    <string name="sym_configuration">码制设置</string>
+    <string name="sym_enable">打开</string>
+    <string name="sym_enable_summary">勾选打开码制</string>
+    <string name="sym_advanced_preferences">高级设置</string>
+    <string name="sym_advanced_preferences_summary">设置码制高级设置 (最小长度, 最大长度, 等.)</string>
+    <string name="sym_minlength_title">最小长度</string>
+    <string name="sym_minlength_summary">配置最小长度</string>
+    <string name="sym_maxlength_title">最大长度</string>
+    <string name="sym_maxlength_summary">配置最大长度</string>
+    <string name="symbology_select_to_configure_advanced_properties"> </string>
+    <string name="sym_enable_disable">打开/关闭码制</string>
+    <string name="sym_uncheck_to_disable">当前打开，不勾选关闭</string>
+    <string name="sym_check_to_enable">当前关闭，勾选打开</string>
+    <string name="scanning_preferences">扫描设置</string>
+
+    <string name="title_lights_config">扫描光配置</string>
+    <string name="title_lights_config_summary">用于设置扫描灯光</string>
+
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="prefix">前缀</string>
+    <string name="suffix">后缀</string>
+    <string name="append_ending_char">追加结束符</string>
+    <string name="key_config">按键设置</string>
+    <string name="key_config_sum">设置触发扫描按键</string>
+    <string name="decoding_settings">扫码结果设置</string>
+    <!-- Lights Mode Strings -->
+    <string-array name="lights_config_values_titles">
+        <item>白光/红色激光关闭</item>
+        <item>仅红色激光</item>
+        <item>仅白光</item>
+        <item>交替使用</item>
+        <item>同时使用</item>
+    </string-array>
+
+
+    <string-array name="input_modes">
+        <item>广播接收模式</item>
+        <item>输入框输入模式</item>
+    </string-array>
+
+    <!-- Wait For Decode Strings -->
+    <string name="decode_wait_for_decode_config">解码超时设置</string>
+    <string name="title_wait_for_decode_config_summary">等待单个或者多个码制</string>
+    <string-array name="wait_for_decode_config_values_titles">
+        <item>单个</item>
+        <item>多个</item>
+    </string-array>
+
+    <!-- File Save Type Strings -->
+    <string-array name="file_save_type_titles">
+        <item>.pgm</item>
+        <item>.png</item>
+        <item>.raw</item>
+    </string-array>
+
+    <!-- Common Symbology Config Strings -->
+    <string name="sybology_configuration">码制配置</string>
+    <string name="symbology_enable_disable_configuration">打开/关闭码制</string>
+    <string name="symbology_enable_disable_configuration_summary">打开或者禁用码制</string>
+    <string name="symbology_advanced_configuration">高级配置</string>
+    <string name="symbology_advanced_configuration_summary">配置最小、最大长度等</string>
+    <string name="sym_postal_list_title">邮政码制配置</string>
+    <string name="sym_postal_list_summary">配置2D邮政码制</string>
+
+    <!-- Postal Strings -->
+    <string-array name="postal_sym_entries">
+        <item>No Postal</item>
+        <item>Austrialan Post</item>
+        <item>British Post</item>
+        <item>Canadian Post</item>
+        <item>Dutch Post</item>
+        <item>Japan Post</item>
+        <item>Planet Code</item>
+        <item>Post Net</item>
+        <item>US Postals</item>
+        <item>UPU 4 State</item>
+        <item>USPS 4 State</item>
+    </string-array>
+    <string name="sym_koreapost">China Post</string>
+    <string name="sym_chinapost">Korea Post</string>
+
+    <!-- OCR Tempate Strings -->
+    <string-array name="ocr_template_entries">
+        <item>用户自定义</item>
+        <item>护照</item>
+        <item>ISBN</item>
+        <item>Price Field</item>
+        <item>MicrE-13 B</item>
+    </string-array>
+
+    <!-- OCR Mode Strings -->
+    <string-array name="ocr_mode_entries">
+        <item>Off</item>
+        <item>Normal Video</item>
+        <item>Inverse</item>
+        <item>Both</item>
+    </string-array>
+
+    <!-- Symbology Titles -->
+    <!-- sym_name_title -->
+    <!-- SYM_AZTEC = 0 --> 		<string name="sym_aztec_title">Aztec Code</string>
+    <!-- SYM_CODABAR = 1 -->	<string name="sym_codabar_title">Codabar</string>
+    <!-- SYM_CODE11 = 2 -->		<string name="sym_code11_title">Code11</string>
+    <!-- SYM_CODE128 = 3 -->	<string name="sym_code128_title">Code128</string>
+    <!-- SYM_CODE39 = 4 -->		<string name="sym_code39_title">Code39</string>
+    <!-- SYM_CODE49 = 5 -->		<string name="sym_code49_title">Code49</string>
+    <!-- SYM_CODE93 = 6 -->		<string name="sym_code93_title">Code93</string>
+    <!-- SYM_COMPOSITE = 7 -->	<string name="sym_composite_title">Composite</string>
+    <!-- SYM_DATAMATRIX = 8 -->	<string name="sym_datamatrix_title">Data Matrix</string>
+    <!-- SYM_EAN8 = 9 -->		<string name="sym_ean8_title">EAN8</string>
+    <!-- SYM_EAN13 = 10 -->		<string name="sym_ean13_title">EAN13</string>
+    <!-- SYM_INT25 = 11 -->		<string name="sym_int25_title">INT25</string>
+    <!-- SYM_MAXICODE = 12 -->	<string name="sym_maxicode_title">Maxicode</string>
+    <!-- SYM_MICROPDF = 13 -->	<string name="sym_micropdf_title">MicroPDF</string>
+    <!-- SYM_OCR = 14 -->		<string name="sym_ocr_title">OCR</string>
+    <!-- SYM_PDF417 = 15 -->	<string name="sym_pdf417_title">PDF417</string>
+    <!-- SYM_POSTNET = 16 -->	<string name="sym_postnet_title">Postnet</string>
+    <!-- SYM_QR = 17 -->		<string name="sym_qr_title">QR</string>
+    <!-- SYM_RSS = 18 -->		<string name="sym_rss_title">RSS</string>
+    <!-- SYM_UPCA = 19 -->		<string name="sym_upca_title">UPC-A</string>
+    <!-- SYM_UPCE0 = 20 -->		<string name="sym_upce0_title">UPC-E0</string>
+    <!-- SYM_UPCE1 = 21 -->		<string name="sym_upce1_title">UPC-E1</string>
+    <!-- SYM_ISBT = 22 -->		<string name="sym_isbt_title">ISBT</string>
+    <!-- SYM_BPO = 23 -->		<string name="sym_bpo_title">BPO</string>
+    <!-- SYM_CANPOST = 24 -->	<string name="sym_canpost_title">Canadian Post</string>
+    <!-- SYM_AUSPOST = 25 -->	<string name="sym_auspost_title">Australian Post</string>
+    <!-- SYM_IATA25 = 26 -->	<string name="sym_iata25_title">IATA25</string>
+    <!-- SYM_CODABLOCK = 27 -->	<string name="sym_codablock_title">Codeblock</string>
+    <!-- SYM_JAPOST = 28 -->	<string name="sym_japost_title">Japan Post</string>
+    <!-- SYM_PLANET = 29 -->	<string name="sym_planet_title">Planet</string>
+    <!-- SYM_DUTCHPOST = 30 -->	<string name="sym_dutchpost_title">Dutch Post</string>
+    <!-- SYM_MSI = 31 -->		<string name="sym_msi_title">MSI</string>
+    <!-- SYM_TLCODE39 = 32 -->	<string name="sym_tlcode39_title">TLC Code39</string>
+    <!-- SYM_TRIOPTIC = 33 -->	<string name="sym_trioptic_title">Trioptic</string>
+    <!-- SYM_CODE32 = 34 -->	<string name="sym_code32_title">Code32</string>
+    <!-- SYM_STRT25 = 35 -->	<string name="sym_strt25_title">STRT25</string>
+    <!-- SYM_MATRIX25 = 36 -->	<string name="sym_matrix25_title">Matrix 2 or 5</string>
+    <!-- SYM_PLESSEY = 37 -->	<string name="sym_plessey_title">Plessey</string>
+    <!-- SYM_CHINAPOST = 38 -->	<string name="sym_chinapost_title">China Post</string>
+    <!-- SYM_KOREAPOST = 39 -->	<string name="sym_koreapost_title">Korean Post</string>
+    <!-- SYM_TELEPEN = 40 -->	<string name="sym_telepen_title">Telepen</string>
+    <!-- SYM_CODE16K = 41 -->	<string name="sym_code16k_title">Code16K</string>
+    <!-- SYM_POSICODE = 42 -->	<string name="sym_posicode_title">PosiCode</string>
+    <!-- SYM_COUPONCODE = 43 --><string name="sym_couponcode_title">Coupon Code</string>
+    <!-- SYM_USPS4CB = 44 -->	<string name="sym_usps4cb_title">USPS4CB</string>
+    <!-- SYM_IDTAG = 45 -->		<string name="sym_idtag_title">ID Tag</string>
+    <!-- SYM_LABEL = 46 -->		<string name="sym_label_title">Label</string>
+    <!-- SYM_GS1_128 = 47 -->	<string name="sym_gs1_128_title">GS1 128</string>
+    <!-- SYM_HANXIN = 48 -->	<string name="sym_hanxin_title">Hanxin</string>
+    <!-- SYM_GRIDMATRIX = 49 --><string name="sym_gridmatrix_title">Grid Matrix</string>
+    <!-- SYM_POSTALS = 50 -->	<string name="sym_postals_title">Postals</string>
+    <!-- SYM_US_POSTALS1 = 51 --><string name="sym_us_postals1_title">US Postals</string>
+
+    <!-- Symbology Flag Strings -->
+    <string name="sym_check_enable_title">校验打开</string>
+    <string name="sym_start_stop_transmit_enable_title">启动/停止传送</string>
+    <string name="sym_codabar_concatenate_enable_title">Codabar 连接</string>
+    <string name="sym_append_enable_title">添加</string>
+    <string name="sym_fullascii_enable_title">启动/停止传送</string>
+    <string name="sym_composite_upc_enable_title">合成 UPC</string>
+    <string name="sym_check_transmit_enable_title">校验传送</string>
+    <string name="sym_num_transmit_enable_title">传送数</string>
+    <string name="sym_addenda_separator_enable_title">Addenda Separator</string>
+    <string name="sym_2_digit_addenda_enable_title">2 Digit Addenda</string>
+    <string name="sym_5_digit_addenda_enable_title">5 Digit Addenda</string>
+    <string name="sym_addenda_required_enable_title">Addenda Required</string>
+    <string name="sym_upce0_expanded_enable_title">UPCE0 Exanded</string>
+    <string name="sym_rss_rsl_enable_title">RSL RSS Enable</string>
+    <string name="sym_rss_rse_enable_title">RSE RSS Enable</string>
+    <string name="sym_telepen_old_style_enable_title">Telepen Old Style</string>
+    <string name="enable_all_sym">打开所有码制</string>
+    <string name="disable_all_sym">关闭所有码制</string>
+    <string name="about">关于</string>
+    <string name="reset_settings">恢复出厂设置</string>
+
+    <!-- Image Capture Activity String -->
+    <string name="title_activity_image_capture">图像获取</string>
+
+    <!-- Decode Time Limit Strings -->
+    <string name="decode_time_limit_title">扫码超时</string>
+    <string name="decode_time_limit_summary">设置限制解码时间</string>
+
+    <!-- Decode Wait For Decode Strings -->
+    <string name="decode_use_wait_for_decode_with_timeout_only_title">扫描超时</string>
+    <string name="decode_use_wait_for_decode_with_timeout_only_summaryon">Uncheck to use WaitForDecode(timeout, DecodeResult)</string>
+    <string name="decode_use_wait_for_decode_with_timeout_only_summaryoff">Check to use WaitForDecode(timeout)</string>
+
+    <!-- Exposure Mode Strings -->
+    <string name="title_exposure_mode">Exposure Mode</string>
+    <string name="title_exposure_mode_summary">For setting exposure mode</string>
+    <string-array name="exposure_mode_titles">
+        <item>Fixed</item>
+        <item>Auto</item>
+    </string-array>
+
+    <!-- Decode Centering (Windowing) Strings -->
+    <string name="decode_centering_mode_list_title">Mode Configuration</string>
+    <string name="decode_centering_mode_list_summary">For Centering Mode</string>
+    <string-array name="decode_centering_mode_entries">
+        <item>Off</item>
+        <item>Around Aimer</item>
+        <item>Field Of View</item>
+        <item>Sub Image</item>
+    </string-array>
+
+    <!-- Aus Interpret Mode Strings -->
+    <string name="sym_auspost_interpret_mode_list_title">Aus Post Interpret Mode</string>
+    <string name="sym_auspost_interpret_mode_list_summary">For Setting Interpret Mode</string>
+    <string-array name="sym_auspost_interpret_mode_entries">
+        <item>None</item>
+        <item>Numeric N Table</item>
+        <item>Alphanumeric C Table</item>
+        <item>Combination N and C Tablese</item>
+    </string-array>
+</resources>

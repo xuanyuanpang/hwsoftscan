@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rfid.hwsoftscan">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_MTK_MMHW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_scan"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+        <activity android:name=".ConfigActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+
+        <service android:name=".SotfScanService" />
+
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".KeyReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+            <action android:name="android.intent.action.FUN_KEY"/>
+            <action android:name="android.rfid.FUN_KEY"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".StartReceiver">
+            <intent-filter>
+                <action android:name="android.rfid.START_SCAN_SERVICE" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

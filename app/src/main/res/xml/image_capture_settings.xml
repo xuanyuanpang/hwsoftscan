@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+     
+    <PreferenceCategory android:title="Capture Mode Settings" >
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefPreviewMode"
+            android:summaryOn="Preview mode enabled, pressing scan button will capture in preview mode"
+            android:summaryOff="Check to enable preview mode"
+            android:title="Preview Mode" >
+        </CheckBoxPreference>   
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/pref_ic_lights_control_settings" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefIlluminationOn"
+            android:summary="@string/pref_ic_illumination_on_summary"
+            android:title="@string/pref_ic_illumination_on_settings" >
+        </CheckBoxPreference>   
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefAimerOn"
+            android:summary="@string/pref_ic_aimer_on_summary"
+            android:title="@string/pref_ic_aimer_on_settings" >
+        </CheckBoxPreference> 
+        
+    </PreferenceCategory>
+    
+    <!-- Exposure Settings -->
+   
+    <PreferenceCategory android:title="Exposure Settings" >
+        
+        	<!-- Enable/Disable -->
+		        <CheckBoxPreference
+		            android:title="Configure Exposure"
+		            android:summaryOn="Uncheck to disable"
+		            android:summaryOff="Check to enable"
+		            android:key="exposure_settings_enable"
+		            android:defaultValue="false" />
+		        
+            <ListPreference
+            android:title="@string/title_exposure_mode"
+            android:summary="@string/title_exposure_mode_summary"
+	        android:defaultValue="2"
+	        android:entries="@array/exposure_mode_titles"
+	        android:entryValues="@array/exposure_mode_values"
+	        android:key="prefExposureMode"
+	        android:negativeButtonText="@null"
+	        android:positiveButtonText="@null"
+	        android:dependency="exposure_settings_enable"  />
+            
+            <PreferenceScreen 
+	            android:title="Exposure Settings"
+	            android:summary="Select to configure exposure settings"
+	            android:dependency="exposure_settings_enable">
+				
+		        <!-- DEC_ES_EXPOSURE_METHOD -->
+		        <EditTextPreference 
+	                android:title="Method"
+	                android:summary="Sets the exposure method"
+	                android:key="exposure_method"
+	                android:inputType="number"
+	                android:defaultValue="0"
+	                android:dependency="exposure_settings_enable" />
+		        <!-- DEC_ES_TARGET_VALUE -->
+	            <EditTextPreference 
+	                android:title="White Target"
+	                android:summary="Sets the white target level"
+	                android:key="exposure_target_value"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+	            <!-- DEC_ES_TARGET_PERCENTILE -->
+	            <EditTextPreference 
+	                android:title="Target Percentile"
+	                android:summary="Sets the white target percentile level"
+	                android:key="exposure_target_percentile"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+	            <!-- DEC_ES_TARGET_ACCEPT_GAP -->
+	            <EditTextPreference 
+	                android:title="Target Gap"
+	                android:summary="Sets the target acceptance gap"
+	                android:key="exposure_target_acceptance_gap"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+	            <!-- DEC_ES_MAX_EXP -->
+		        <EditTextPreference 
+	                android:title="Max Exposure"
+	                android:summary="Sets the maximum exposure"
+	                android:key="exposure_max_exposure"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_MAX_GAIN -->
+		        <EditTextPreference 
+	                android:title="Max Gain"
+	                android:summary="Sets the maximum gain"
+	                android:key="exposure_max_gain"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_FRAME_RATE -->
+		        <EditTextPreference 
+	                android:title="Frame Rate"
+	                android:summary="Sets the frame rate"
+	                android:key="exposure_frame_rate"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_CONFORM_IMAGE -->
+		        <CheckBoxPreference
+		            android:defaultValue="true"
+		            android:key="exposure_conform"
+		            android:summary="Select to enable image must conform"
+		            android:title="Must Conform"
+		            android:dependency="exposure_settings_enable" >
+       			 </CheckBoxPreference> 
+		        <!-- DEC_ES_CONFORM_TRIES -->
+		        <EditTextPreference 
+	                android:title="Conform Tries"
+	                android:summary="Sets the conform tries"
+	                android:key="exposure_conform_tries"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_SPECULAR_EXCLUSION -->
+		        <EditTextPreference 
+	                android:title="Conform Tries"
+	                android:summary="Sets the conform tries"
+	                android:key="exposure_specular_exclusion"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_SPECULAR_SAT -->
+		        <EditTextPreference 
+	                android:title="Specular Saturation"
+	                android:summary="Sets the specular saturation"
+	                android:key="exposure_specular_saturation"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_SPECULAR_LIMIT -->
+		        <EditTextPreference 
+	                android:title="Specular Limit"
+	                android:summary="Sets the specular limit"
+	                android:key="exposure_specular_limit"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_FIXED_EXP -->
+		        <EditTextPreference 
+	                android:title="Fixed Exposure"
+	                android:summary="Sets the fixed exposure"
+	                android:key="exposure_fixed_exposure"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_FIXED_GAIN -->
+		        <EditTextPreference 
+	                android:title="Fixed Gain"
+	                android:summary="Sets the fixed gain"
+	                android:key="exposure_fixed_gain"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+		        <!-- DEC_ES_FIXED_FRAMERATE -->
+		        <EditTextPreference 
+	                android:title="Fixed Frame Rate"
+	                android:summary="Sets the fixed frame rate"
+	                android:key="exposure_fixed_frame_rate"
+	                android:inputType="number"
+	                android:defaultValue="0" 
+	                android:dependency="exposure_settings_enable"/>
+	            
+		    </PreferenceScreen>
+        
+    </PreferenceCategory>
+    
+    
+    
+</PreferenceScreen>

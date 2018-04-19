@@ -1,0 +1,60 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    
+    <!-- Scan / Image Mode -->
+    <item
+        android:id="@+id/mode"
+        android:orderInCategory="101"
+        android:title="@string/image_mode"
+        android:icon="@drawable/ic_action_image_mode">
+    </item>
+    
+    <!--  Get Last Image -->
+    <item
+        android:id="@+id/get_last_image"
+        android:orderInCategory="102"
+        android:title="@string/get_last_image"
+        android:icon="@drawable/ic_menu_get_last_image3">
+    </item>
+    
+    <!--  Disable All Symbologies -->
+    <item
+        android:id="@+id/disable_all_symbologies"
+        android:orderInCategory="103"
+        android:title="@string/disable_all_sym"
+        android:icon="@drawable/ic_action_disable_all">
+    </item>
+    
+    <!--  Enable All Symbologies -->
+    <item
+        android:id="@+id/enable_all_symbologies"
+        android:orderInCategory="104"
+        android:title="@string/enable_all_sym"
+        android:icon="@drawable/ic_action_enable_all">
+    </item>
+    
+    <!--  Symbology/Decoder/App Settings -->
+    <item
+        android:id="@+id/menu_settings"
+        android:orderInCategory="105"
+        android:title="@string/menu_settings"
+        android:icon="@drawable/ic_action_settings2">
+    </item>
+    
+    <!--  Reset Settings -->
+    <item
+        android:id="@+id/reset_settings"
+        android:orderInCategory="106"
+        android:title="@string/reset_settings"
+        android:icon="@drawable/ic_action_settings2">
+    </item> 
+    
+    <!--  About Menu -->
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="107"
+        android:title="@string/about"
+        android:icon="@drawable/ic_action_about">
+    </item>
+ 
+</menu>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ScanTest</string>
+    <string name="start">START SCAN</string>
+    <string name="stop">STOP SCAN</string>
+    <string name="auto_scan">auto scan</string>
+    <string name="clear">CLEAR</string>
+</resources>

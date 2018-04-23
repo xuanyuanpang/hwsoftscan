@@ -86,6 +86,7 @@ public class SotfScanService extends Service {
         filter.addAction(ACTION_SCAN_KEY);
         filter.addAction(ACTION_SCAN_CONFIG);
         filter.addAction(ACTION_SCAN_SET_TIMEOUT);
+        filter.addAction(ACTION_SET_SCAN_MODE);
         filter.addAction(ACTION_CLOSE_SCAN);
         scanBroadcast = new ScanBroadcast() ;
         registerReceiver(scanBroadcast, filter);
@@ -221,6 +222,7 @@ public class SotfScanService extends Service {
             } else if (ACTION_SCAN_INIT.equals(action)) {//扫描初始化
 //                timeOut = intent.getIntExtra("timeout", 3000);
                     mDecoder = new Decoder() ;
+                    mDecodeResult = new DecodeResult();
                      try {
                      mDecoder.connectDecoderLibrary();
                     Log.e(TAG, "decoder init success");
@@ -235,8 +237,9 @@ public class SotfScanService extends Service {
             }else if (ACTION_SET_SCAN_MODE.equals(action)) {//设置输入模式
 //                timeOut = intent.getIntExtra("timeout", 3000);
                 int mode = intent.getIntExtra("mode", 0);//0为广播模式
+                Log.e("mode", "set scan mode = " + mode) ;
                 SharedPreferences.Editor edit = prefs.edit() ;
-                edit.putInt("inputConfig", mode);
+                edit.putString("inputConfig", "0");
                 edit.commit() ;
 
             }else if (ACTION_SCAN_KEY.equals(action)) {//设置扫码超时
@@ -264,7 +267,7 @@ public class SotfScanService extends Service {
         public void run() {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String time = prefs.getString("decode_time_limit", "3000");//扫码超时
-            String mode = prefs.getString("inputConfig", "1");//扫码模式
+            String mode = prefs.getString("inputConfig", "0");//扫码模式
             boolean isOpen = prefs.getBoolean("switch_scan_service", false);
             timeOut = Integer.valueOf(time);
             if (mDecoder != null && !isScanning ) {

@@ -94,12 +94,13 @@ public class ConfigActivity extends PreferenceActivity implements Preference.OnP
     private ListPreference listPreferenceAppend  ;
 
     private PreferenceScreen mPreference ;
+    private boolean isboot ;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(android.R.style.Theme_Material_Light_DarkActionBar);
         addPreferencesFromResource(R.xml.configuration_settings);
-
+        isboot = getIntent().getBooleanExtra("isboot", false);
         mPreference = getPreferenceScreen() ;
         swichScanService = (SwitchPreference) findPreference(SWITCH_SCAN_SERVICE);
         swichScanService.setOnPreferenceChangeListener(this);
@@ -168,6 +169,11 @@ public class ConfigActivity extends PreferenceActivity implements Preference.OnP
             findPreference(CATEGORY_SCAN_TIME).setEnabled(false);
         }
 
+        if (isboot) {
+            Intent toServeive = new Intent(this, SotfScanService.class);
+            startService(toServeive);
+            finish();
+        }
     }
 
     @Override

@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                scanUtil.setScanMode(0);//mode :0 , 广播模式， 1， 编辑输入模式
                 if(setBarcode != null)
                 setBarcode.clear();
                 if(mapBarcode != null)
@@ -162,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 //                intent.setAction("com.rfid.SCAN_CMD");
 //                sendBroadcast(intent);
                 if (scanUtil != null) {
-                    scanUtil.setScanMode(0);//mode :0 , 广播模式， 1， 编辑输入模式
+
                     scanUtil.scan();
                 }
 /*

@@ -12,6 +12,6 @@ public class StartReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Intent toServeive = new Intent(context, SotfScanService.class);
-        context.startActivity(toServeive);
+//        context.startService(toServeive);
     }
 }

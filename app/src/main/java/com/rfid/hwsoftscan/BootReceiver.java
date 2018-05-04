@@ -20,7 +20,7 @@ public class BootReceiver extends BroadcastReceiver{
 //            Intent toServeive = new Intent(context, SotfScanService.class);
 //            context.startService(toServeive);
             Intent toServeive = new Intent(context, ConfigActivity.class);
-        toServeive.putExtra("isboot", true);
+            toServeive.putExtra("isboot", true);
             context.startActivity(toServeive);
 //        }
 

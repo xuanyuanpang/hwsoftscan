@@ -390,46 +390,32 @@ public class SotfScanService extends Service {
             String action = intent.getAction() ;
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             boolean isOpen = prefs.getBoolean("switch_scan_service", false);
-//            if (isOpen) {
-//                if(Intent.ACTION_SCREEN_ON.equals(action)){//连接扫描头
-//                    if (mDecoder == null) {
-//                        mDecodeResult = new DecodeResult();
-//                        mDecoder = new Decoder() ;
-//                        try {
-//                            mDecoder.connectDecoderLibrary();
-//                            Log.e(TAG, "decoder init success");
-//                            SetSymbologySettings();
-//                        } catch (Exception e) {
-//                            Log.e(TAG, "decoder init fail");
-//                            mDecoder = null ;//连接扫描头失败
-//                        }
-//                    }
-//                } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {//关闭扫描头
-//                    if (mDecoder != null) {
-//                        try {
-////                            mDecoder.stopScanning();
-//                            mDecoder.disconnectDecoderLibrary();
-//                            mDecoder = null ;
-//                        } catch (DecoderException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }
-//            }
-//            if(scanConfig.isPowerScreen()){
-//                //SCREEN ON ACTION
-//                if(action.equals(Intent.ACTION_SCREEN_ON)){
-////					Log.e("powerModeReceiver", "screent on +++ ") ;
-//                    new Thread(initTask).start() ;
-//                }
-//                //SCREEN OFF ACTION
-//                if(action.equals(Intent.ACTION_SCREEN_OFF)){
-////					Log.e("powerModeReceiver", "screent off +++") ;
-//                    if(scanDev != null){
-//                        scanDev.close() ;
-//                    }
-//                }
-//            }
+            if (isOpen) {
+                if(Intent.ACTION_SCREEN_ON.equals(action)){//连接扫描头
+                    if (mDecoder == null) {
+                        mDecodeResult = new DecodeResult();
+                        mDecoder = new Decoder() ;
+                        try {
+                            mDecoder.connectDecoderLibrary();
+                            Log.e(TAG, "decoder init success");
+                            SetSymbologySettings();
+                        } catch (Exception e) {
+                            Log.e(TAG, "decoder init fail");
+                            mDecoder = null ;//连接扫描头失败
+                        }
+                    }
+                } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {//关闭扫描头
+                    if (mDecoder != null) {
+                        try {
+//                            mDecoder.stopScanning();
+                            mDecoder.disconnectDecoderLibrary();
+                            mDecoder = null ;
+                        } catch (DecoderException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
 
         }
     };

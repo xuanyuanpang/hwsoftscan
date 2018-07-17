@@ -215,6 +215,8 @@
     <string name="about">关于</string>
     <string name="reset_settings">恢复出厂设置</string>
 
+    <string name="result_char_set">扫描结果字符编码</string>
+
     <!-- Image Capture Activity String -->
     <string name="title_activity_image_capture">图像获取</string>
 

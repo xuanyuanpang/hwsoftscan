@@ -22,6 +22,14 @@
          />
 
     <TextView
+        android:id="@+id/textView_list_item_code_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text=""
+        android:layout_weight="1" />
+
+    <TextView
         android:id="@+id/textView_list_item_count"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

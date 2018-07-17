@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             byte[] data = intent.getByteArrayExtra("data");
+            byte codeID = intent.getByteExtra("code_id", (byte)0) ;
             if (data != null) {
                 Log.e(TAG, new String(data));
                 String barcode = new String(data);
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     b.sn = 1;
                     b.barcode = barcode;
                     b.count = 1;
+                    b.codeID = codeID ;
                     listBarcode.add(b);
                     mapBarcode.put(barcode, 0);//list index
                     adapter = new MAdapter() ;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         Barcode b = new Barcode();
                         b.sn = listBarcode.size() ;
                         b.barcode = barcode;
+                        b.codeID = codeID ;
                         b.count = 1;
                         listBarcode.add(b);
                         setBarcode.add(barcode);
@@ -92,17 +95,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //注册广播
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("com.rfid.SCAN");
-        registerReceiver(receiver, filter);
+
 
         Log.i(TAG, "onCreate--------------");
-        IntentFilter batteryfilter = new IntentFilter();
-        batteryfilter.addAction(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(batteryReceiver, batteryfilter);
 
-        Util.initSoundPool(this);
+//        Util.initSoundPool(this);
         btn = (Button) findViewById(R.id.button_test);
         btnClear = (Button) findViewById(R.id.button_clear);
         lv = (ListView) findViewById(R.id.listview_barcode);
@@ -141,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                scanUtil.setScanMode(0);//mode :0 , 广播模式， 1， 编辑输入模式
+//                scanUtil.setScanMode(0);//mode :0 , 广播模式， 1， 编辑输入模式
                 if(setBarcode != null)
                 setBarcode.clear();
                 if(mapBarcode != null)
@@ -206,7 +203,13 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (scanUtil == null) {
             scanUtil = new ScanUtil(this);
-
+            scanUtil.setScanMode(0);//mode :0 , 广播模式， 1， 编辑输入模式
+            //isEnable true open, false close
+            scanUtil.setScanSym(ScanUtil.SymbologyValues.SYM_PDF417, true);//open pdf417 code
+            //注册广播
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("com.rfid.SCAN");
+            registerReceiver(receiver, filter);
         }
 
     }
@@ -217,14 +220,14 @@ public class MainActivity extends AppCompatActivity {
         if (scanUtil != null) {
             scanUtil.close();
             scanUtil = null ;
+            unregisterReceiver(receiver);
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(receiver);
-        unregisterReceiver(batteryReceiver);
+
         if(timer != null){
             timer.cancel();
         }
@@ -263,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.tvSn = (TextView) convertView.findViewById(R.id.textView_list_item_id);
                 holder.tvBarcode = (TextView) convertView.findViewById(R.id.textView_list_item_barcode);
                 holder.tvCount = (TextView) convertView.findViewById(R.id.textView_list_item_count);
+                holder.tvCodeID = (TextView) convertView.findViewById(R.id.textView_list_item_code_id);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -272,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 holder.tvSn.setText("" + b.sn);
                 holder.tvBarcode.setText("" + b.barcode);
                 holder.tvCount.setText("" + b.count);
+                holder.tvCodeID.setText(String.format("(0x%x)",  b.codeID) );
             }
             return convertView;
         }
@@ -281,19 +286,11 @@ public class MainActivity extends AppCompatActivity {
             TextView tvSn;
             TextView tvBarcode;
             TextView tvCount;
+            TextView tvCodeID ;
 
         }
     }
 
 
-    //测试监听电池电量
-    private BroadcastReceiver batteryReceiver = new BroadcastReceiver(){
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int level = intent.getIntExtra("level", 0);
-            Log.e("batteryReceiver", "batteryReceiver level =  " + level);
-        }
-    };
 
 }

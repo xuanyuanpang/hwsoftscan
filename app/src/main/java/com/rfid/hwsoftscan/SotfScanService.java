@@ -6,11 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.hsm.barcode.DecodeResult;
@@ -18,6 +26,8 @@ import com.hsm.barcode.Decoder;
 import com.hsm.barcode.DecoderConfigValues;
 import com.hsm.barcode.DecoderException;
 import com.hsm.barcode.SymbologyConfig;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * 此服务需要开机后一直运行，外部调用时可以传入各种指令
@@ -42,6 +52,10 @@ public class SotfScanService extends Service {
 
     public static final String ACTION_SET_SCAN_MODE = "com.rfid.SET_SCAN_MODE"; //ACTION_SCAN_CMD
 
+    public static final String ACTION_ENABLE_SYM = "com.rfid.ENABLE_SYM"; //ACTION_SCAN_CMD
+
+    public static final String ACTION_DISENABLE_SYM = "com.rfid.DISENABLE_SYM"; //ACTION_SCAN_CMD
+
     public static final String SCAN_RESULT = "com.rfid.SCAN";//扫描结果广播返回
 
 
@@ -64,6 +78,21 @@ public class SotfScanService extends Service {
     private Handler mhandler = new Handler();
 
     private int timeOut = 3000 ;//默认设置解码超时3s
+
+
+    //////////711//////////////
+    private WindowManager wm  ;
+
+    private float mTouchX;
+    private float mTouchY;
+    private float x;
+    private float y;
+    private float mStartX;
+    private float mStartY;
+
+    LinearLayout mFloatLayout;
+    WindowManager.LayoutParams wmParams;
+    ////////////////////////
 
     public SotfScanService() {
     }
@@ -88,6 +117,7 @@ public class SotfScanService extends Service {
         filter.addAction(ACTION_SCAN_SET_TIMEOUT);
         filter.addAction(ACTION_SET_SCAN_MODE);
         filter.addAction(ACTION_CLOSE_SCAN);
+        filter.addAction(ACTION_ENABLE_SYM);
         scanBroadcast = new ScanBroadcast() ;
         registerReceiver(scanBroadcast, filter);
         //listner screen on/off
@@ -107,12 +137,17 @@ public class SotfScanService extends Service {
 //            Log.e(TAG, "decoder init fail");
 //            mDecoder = null ;//连接扫描头失败
 //        }
+//        createFloatWindow();
     }
 
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        //
+        if (wm != null) {
+            wm.removeView(mFloatLayout);
+        }
         if (mDecoder != null) {
             try {
 //                mDecoder.stopScanning();
@@ -134,6 +169,7 @@ public class SotfScanService extends Service {
         if (intent == null) {
             return super.onStartCommand(intent, flags, startId);
         }
+//        createFloatWindow();//创建悬浮
         boolean keyDown = intent.getBooleanExtra("keyDown", false);//按键是否按下
         if (keyDown && !isScanning && isUp) {
             isUp = false ;
@@ -182,7 +218,7 @@ public class SotfScanService extends Service {
             //根据不同的action执行不同的操作
             if (ACTION_SCAN.equals(action)) {
                 new Thread(new ScanRunnable()).start();//创建扫描线程
-            } else if (ACTION_KILL_SCAN.equals(action)) {
+            } else if (ACTION_KILL_SCAN.equals(action)) {//关闭服务
                 if (mDecoder != null) {
                     try {
 //                        mDecoder.stopScanning();
@@ -204,15 +240,20 @@ public class SotfScanService extends Service {
                         e.printStackTrace();
                     }
                 }
+                if (wm != null) {
+                    wm.removeView(mFloatLayout);
+                    wm = null ;
+                }
                 //设置扫描服务开头为不可用
-                SharedPreferences.Editor edit = prefs.edit() ;
-                edit.putBoolean("switch_scan_service", false);
-                edit.commit() ;
+//                SharedPreferences.Editor edit = prefs.edit() ;
+//                edit.putBoolean("switch_scan_service", false);
+//                edit.commit() ;
 
             } else if (ACTION_SCAN_CONFIG.equals(action)) {//设置参数
                 if (mDecoder != null) {
                     SetSymbologySettings();
                     try {
+                        SetOcrSettings();
                         SetScanningSettings();//设置扫描灯光
                     } catch (DecoderException e) {
                         e.printStackTrace();
@@ -226,12 +267,19 @@ public class SotfScanService extends Service {
                      try {
                      mDecoder.connectDecoderLibrary();
                     Log.e(TAG, "decoder init success");
+                    //pang add disable all
+//                  mDecoder.disableSymbology(DecoderConfigValues.SymbologyID.SYM_ALL);
+                    mDecoder.enableSymbology(DecoderConfigValues.SymbologyID.SYM_ALL);
                     SetSymbologySettings();
+                    SetOcrSettings() ;
                     } catch (Exception e) {
                     Log.e(TAG, "decoder init fail");
                     mDecoder = null ;//连接扫描头失败
                     }
-
+                    //设置模式为广播模式
+                    SharedPreferences.Editor edit = prefs.edit() ;
+                    edit.putString("inputConfig", "0" );
+                    edit.commit() ;
 
 
             }else if (ACTION_SET_SCAN_MODE.equals(action)) {//设置输入模式
@@ -239,9 +287,9 @@ public class SotfScanService extends Service {
                 int mode = intent.getIntExtra("mode", 0);//0为广播模式
                 Log.e("mode", "set scan mode = " + mode) ;
                 SharedPreferences.Editor edit = prefs.edit() ;
-                edit.putString("inputConfig", "0");
+                edit.putString("inputConfig", "" + mode);
                 edit.commit() ;
-
+                SetSymbologySettings();
             }else if (ACTION_SCAN_KEY.equals(action)) {//设置扫码超时
 //                if (keyDown && !isScanning) {
 //                    new Thread(new ScanRunnable()).start();//创建扫描线程
@@ -255,8 +303,22 @@ public class SotfScanService extends Service {
 //                    }
 //                }
 
+            } else if (ACTION_ENABLE_SYM.equals(action)) {//设置码制
+                String symbology = intent.getStringExtra("symbology");
+                boolean isOpen = intent.getBooleanExtra("enable", false);
+                SharedPreferences.Editor edit = prefs.edit() ;
+                edit.putBoolean(symbology,  isOpen);
+                edit.commit() ;
+                Log.e("symbology", "set scan symbology = " + symbology) ;
+                SetSymbologySettings();
+            } else if (ACTION_DISENABLE_SYM.equals(action)) {//关闭码制
             }
         }
+    }
+
+    //设置码制开头
+    private void setSym(String sym, boolean enable) {
+
     }
 
     private boolean isScanning = false ;
@@ -268,31 +330,44 @@ public class SotfScanService extends Service {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
             String time = prefs.getString("decode_time_limit", "3000");//扫码超时
             String mode = prefs.getString("inputConfig", "0");//扫码模式
+            String charSet = prefs.getString("result_char_set", "1") ;//字符编码
             boolean isOpen = prefs.getBoolean("switch_scan_service", false);
             timeOut = Integer.valueOf(time);
             if (mDecoder != null && !isScanning ) {
                 Log.e("mode", "mode = " + mode) ;
                     try {
                         isScanning = true ;
-                        mDecoder.waitForDecodeTwo(timeOut, mDecodeResult);
-                        isScanning = false ;
-                        if (mDecodeResult.length > 0 && mDecoder!= null) {
-                            byte[] tt = mDecoder.getBarcodeByteData();
-                            Log.e(TAG, "barcode = " + new String(tt));
-                            mhandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Util.play(1, 0);
+                        synchronized (mDecoder) {//加个线程锁
+                            mDecoder.waitForDecodeTwo(timeOut, mDecodeResult);
+
+                            if (mDecodeResult.length > 0 && mDecoder != null) {
+                                byte[] tt = mDecoder.getBarcodeByteData();
+                                byte codeID = mDecoder.getBarcodeCodeID() ;//AIM
+//                                Log.e(TAG, "barcode = " + new String(tt));
+                                mhandler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Util.play(1, 0);
+                                    }
+                                });
+                                if ("0".equals(mode)) {
+                                    sendScanResult(tt, codeID);//广播模式
+                                } else if ("1".equals(mode)) {
+                                    if(charSet.equals("1")){
+                                        sendToInput(new String(tt), false);//后台输入
+                                    }else{
+                                        try {
+                                            sendToInput(new String(tt, "gbk"), false);//后台输入
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
                                 }
-                            }) ;
-                            if ("0".equals(mode)) {
-                                sendScanResult(tt) ;//广播模式
-                            } else if ("1".equals(mode)) {
-                                sendToInput(new String(tt), false) ;//后台输入
+
                             }
-
                         }
-
+//                        isScanning = false ;
                     } catch (DecoderException e) {
                         isScanning = false ;
                     }
@@ -306,11 +381,12 @@ public class SotfScanService extends Service {
                     Log.e(TAG, "decoder init success");
 //            setSymbologyPreferences(false); //设置码制
                     SetSymbologySettings();
+                    SetOcrSettings() ;
                 } catch (Exception e) {
                     Log.e(TAG, "decoder init fail");
                     mDecoder = null ;//连接扫描头失败
                 }
-                this.run();//重新调用
+//                this.run();//重新调用,注：这样调用重新启动会出现长时间亮光
             }
         }
     }
@@ -320,9 +396,10 @@ public class SotfScanService extends Service {
      * 将扫描结果以广播的形式发回
      * @param data
      */
-    private void sendScanResult(byte[] data){
+    private void sendScanResult(byte[] data, byte codeID){
         Intent intent = new Intent();
         intent.putExtra("data", data);
+        intent.putExtra("code_id", codeID);
         intent.setAction(SCAN_RESULT);
         sendBroadcast(intent);
     }
@@ -1005,7 +1082,10 @@ public class SotfScanService extends Service {
                     // enable, check transmit, sys num transmit, addenda separator, 2 digit addenda, 5 digit addenda, addenda required
                     flags |= sharedPrefs.getBoolean("sym_upca_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_ENABLE : 0;
                     flags |= sharedPrefs.getBoolean("sym_upca_check_transmit_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_CHECK_ENABLE : 0;
+                    Log.e("SoftScanService" , "sym_upca_check_transmit_enable = " + sharedPrefs.getBoolean("sym_upca_check_transmit_enable", false)) ;
                     flags |= sharedPrefs.getBoolean("sym_upca_sys_num_transmit_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_NUM_SYS_TRANSMIT : 0;
+                    Log.e("SoftScanService" , "sym_upca_sys_num_transmit_enable = " + sharedPrefs.getBoolean("sym_upca_sys_num_transmit_enable", false)) ;
+
                     flags |= sharedPrefs.getBoolean("sym_upca_addenda_separator_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_ADDENDA_SEPARATOR : 0;
                     flags |= sharedPrefs.getBoolean("sym_upca_2_digit_addenda_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_2_DIGIT_ADDENDA : 0;
                     flags |= sharedPrefs.getBoolean("sym_upca_5_digit_addenda_enable", false) ? DecoderConfigValues.SymbologyFlags.SYMBOLOGY_5_DIGIT_ADDENDA : 0;
@@ -1234,11 +1314,63 @@ public class SotfScanService extends Service {
                 // invalid
             }
         }
-
+///UPCA
+        boolean upcaCheck = sharedPrefs.getBoolean("sym_upca_check_transmit_enable", false) ;
+        if(upcaCheck) {
+            SymbologyConfig config2 = new SymbologyConfig(DecoderConfigValues.SymbologyID.SYM_UPCA);
+            config2.Flags = 1;
+            config2.Flags |= DecoderConfigValues.SymbologyFlags.SYMBOLOGY_CHECK_TRANSMIT;
+            config2.Flags |= DecoderConfigValues.SymbologyFlags.SYMBOLOGY_NUM_SYS_TRANSMIT;
+//            config2.Flags |= DecoderConfigValues.SymbologyFlags.SYMBOLOGY_UPCA_TRANSLATE_TO_EAN13 ;
+            config2.Mask = 1;
+            try {
+                mDecoder.setSymbologyConfig(config2);
+            } catch (DecoderException e) {
+                e.printStackTrace();
+            }
+        }
+        ///upca
         Log. d(TAG, "SetSymbologySettings--");
     }
 
 
+    /**
+     * Sets the OCR settings based on user preferences
+     * @throws DecoderException
+     *
+     */
+    void SetOcrSettings() throws DecoderException
+    {
+        Log. d(TAG, "SetOcrSettings++");
+        int ocr_mode = 0;
+        int ocr_template = 0;
+        byte[] ocr_user_defined_template;
+        String temp;
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // mode (enable)
+        temp = sharedPrefs.getString("sym_ocr_mode_config", "0"); ocr_mode = Integer.parseInt(temp);
+        // ocr template
+        temp = sharedPrefs.getString("sym_ocr_template_config", "0"); ocr_template = Integer.parseInt(temp);
+        // user defined template
+        temp = sharedPrefs.getString("sym_ocr_user_template", "13777777770");
+        ocr_user_defined_template = temp.getBytes();
+
+        Log. e(TAG, "ocr mode = " + ocr_mode);
+        Log. e(TAG, "ocr template config = " + ocr_template);
+        Log. e(TAG, "ocr user template string = " + temp);
+        for(int i = 0; i < ocr_user_defined_template.length; i++)
+            Log. e(TAG, "ocr user template bytes[" + i + "] = " + ocr_user_defined_template[i]);
+
+        mDecoder.setOCRMode(ocr_mode);
+        Log.e("SetOcrSettings", "setOCRMode-" + ocr_mode);
+        mDecoder.setOCRTemplates(ocr_template);
+        Log.e("SetOcrSettings", "setOCRTemplates-" + ocr_template);
+        mDecoder.setOCRUserTemplate(ocr_user_defined_template);
+        Log.e("SetOcrSettings", "setOCRUserTemplate-" + temp);
+        Log. d(TAG, "SetOcrSettings--");
+    }
 
     /**
      * Sets the Scanning settings based on user preferences
@@ -1265,5 +1397,97 @@ public class SotfScanService extends Service {
 
         Log. d(TAG, "SetScanningSettings--");
     }
+
+
+    ////////////////////////////////////////////////
+    int isLongPress = 0 ;
+    private void createFloatWindow(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean isOpen = prefs.getBoolean("switch_scan_service", false);
+        if (wm != null || !isOpen) {
+            return ;
+        }
+        wmParams = new WindowManager.LayoutParams();
+        wm = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        display.getMetrics(dm);
+
+
+        wmParams.type = WindowManager.LayoutParams.TYPE_PHONE;
+        wmParams.format = PixelFormat.RGBA_8888;
+        wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE ;
+        wmParams.gravity = Gravity.LEFT | Gravity.TOP;
+        wmParams.x = dm.widthPixels;
+        wmParams.y = dm.heightPixels/2;
+        wmParams.width = 100;
+        wmParams.height = 100;
+        LayoutInflater inflater = LayoutInflater.from(getApplication());
+        mFloatLayout = (LinearLayout) inflater.inflate(R.layout.float_window, null);
+
+        mFloatLayout.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                x = event.getRawX();
+                y = event.getRawY() ;
+                switch (event.getAction()) {
+                    case 0:
+                        Log.e("", "ACTION_DOWN");
+                        mTouchX = event.getX();
+                        mTouchY = event.getY();
+                        mStartX = x;
+                        mStartY = y;
+                        isLongPress = 0 ;
+                        mFloatLayout.setBackground(getResources().getDrawable(R.drawable.bg_yellow)) ;
+                        break;
+                    case 2:
+//                        if ((x - mStartX) < 5 && (y - mStartY) < 5) {
+//                        }else{
+//                            updateView();
+//                        }
+                        if (isLongPress > 10) {
+                            updateView();
+                        }
+                        isLongPress++ ;
+                        break;
+                    case 1:
+                        isLongPress = 0 ;
+                        mFloatLayout.setBackground(getResources().getDrawable(R.drawable.bg_red)) ;
+                        if ((x - mStartX) < 5 && (y - mStartY) < 5) {
+                            new Thread(new ScanRunnable()).start();//创建扫描线程
+//                        Log.e("onclice", "start = " + startFlag) ;
+//                        if(scanConfig.is1D()){
+//                            Intent to1D = new Intent(FloatWindow.this, Scan1DService.class) ;
+//                            startService(to1D) ;
+//                        }else{
+//                            Intent intent = new Intent(FloatWindow.this, ScanService.class) ;
+//                            startService(intent) ;
+//                        }
+                        }else{
+                            Log.e("onclice", "finish++++") ;
+                            updateView();
+                            mFloatLayout.setBackground(getResources().getDrawable(R.drawable.bg_red)) ;
+                            mTouchX = mTouchY = 0;
+                        }
+                        break;
+                    default:
+
+                        break;
+                }
+                return true;
+            }
+        });
+        wm.addView(mFloatLayout, wmParams);
+
+
+    }
+
+    private void updateView(){
+        wmParams.x = (int)(x - mTouchX);
+        wmParams.y = (int)(y - mTouchY);
+        wm.updateViewLayout(mFloatLayout, wmParams);
+    }
+
 
 }

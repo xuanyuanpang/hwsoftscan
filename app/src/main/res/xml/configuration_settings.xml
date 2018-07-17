@@ -35,7 +35,7 @@
 
 						<!-- SYM_CODABAR -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_codabar_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -43,7 +43,7 @@
 
 						<!-- SYM_CODABLOCK -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_codablock_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -51,7 +51,7 @@
 
 						<!-- SYM_CODE11-->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_code11_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -67,7 +67,7 @@
 
 						<!-- SYM_CODE32-->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_code32_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -83,7 +83,7 @@
 
 						<!-- SYM_CODE49 -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_code49_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -123,7 +123,7 @@
 
 						<!-- SYM_EAN8 -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_ean8_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -139,7 +139,7 @@
 
 						<!-- SYM_GS1_128-->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_gs1_128_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -179,7 +179,7 @@
 
 						<!-- SYM_MATRIX25-->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_matrix25_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -203,7 +203,7 @@
 
 						<!-- SYM_MSI -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_msi_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -235,7 +235,7 @@
 
 						<!-- SYM_STRT25 -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_strt25_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -267,7 +267,7 @@
 
 						<!-- SYM_UPCA -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_upca_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -275,7 +275,7 @@
 
 						<!-- SYM_UPCE0 -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_upce0_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -283,7 +283,7 @@
 
 						<!-- SYM_UPCE1 -->
 						<CheckBoxPreference
-							android:defaultValue="false"
+							android:defaultValue="true"
 							android:key="sym_upce1_upce1_enable"
 							android:summaryOff="@string/sym_check_to_enable"
 							android:summaryOn="@string/sym_uncheck_to_disable"
@@ -422,7 +422,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_aztec_max"
 	                android:inputType="number"
-	                android:defaultValue="10" />
+	                android:defaultValue="2000" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_CODABAR -->
@@ -438,7 +438,7 @@
 		        <CheckBoxPreference
 		            android:title="@string/sym_start_stop_transmit_enable_title"
 		            android:key="sym_codabar_start_stop_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Codabar concatenate -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_codabar_concatenate_enable_title"
@@ -457,7 +457,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_codabar_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_CODABLOCK -->
@@ -477,7 +477,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_codablock_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
             
             <!-- SYM_CODE11 -->
@@ -511,7 +511,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_code11_max"
 	                android:inputType="number"
-	                android:defaultValue="10" />
+	                android:defaultValue="100" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_CODE39 -->
@@ -527,12 +527,12 @@
 		        <CheckBoxPreference
 		            android:title="@string/sym_start_stop_transmit_enable_title"
 		            android:key="sym_code39_start_stop_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Append -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_append_enable_title"
 		            android:key="sym_code39_append_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Full Ascii -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_fullascii_enable_title"
@@ -551,7 +551,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_code39_max"
 	                android:inputType="number"
-	                android:defaultValue="20" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_CODE93 -->
@@ -571,7 +571,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_code93_max"
 	                android:inputType="number"
-	                android:defaultValue="20" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
            <!-- SYM_CODE128 -->
@@ -616,7 +616,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_composite_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_CHINAPOST -->
@@ -636,7 +636,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_chinapost_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
             
             <!-- SYM_DATAMATRIX -->
@@ -665,7 +665,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_datamatrix_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="2000" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_EAN8 -->
@@ -678,7 +678,7 @@
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
 		            android:key="sym_ean8_check_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Addenda separator -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_addenda_separator_enable_title"
@@ -746,7 +746,7 @@
 		            android:title="@string/sym_addenda_required_enable_title"
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
-		            android:key=" 13_addenda_required_enable"
+		            android:key="sym_ean13_addenda_required_enable"
 		            android:defaultValue="false" />
 		    </PreferenceScreen>
   
@@ -767,7 +767,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_gs1_128_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
             
          	<!-- SYM_HANXIN -->
@@ -787,7 +787,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_hanxin_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_IATA25-->
@@ -807,7 +807,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_iata25_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_INT25 -->
@@ -823,7 +823,7 @@
 		        <CheckBoxPreference
 		            android:title="@string/sym_check_transmit_enable_title"
 		            android:key="sym_int25_check_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- MinLength -->
 		        <EditTextPreference 
 	                android:title="@string/sym_minlength_title"
@@ -837,7 +837,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_int25_max"
 	                android:inputType="number"
-	                android:defaultValue="20" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_KOREAPOST -->
@@ -857,7 +857,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_koreapost_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_MATRIX25 -->
@@ -877,7 +877,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_matrix25_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_MAXICODE -->
@@ -897,7 +897,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_maxicode_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_MICROPDF -->
@@ -917,7 +917,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_micropdf_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="2000" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_MSI -->
@@ -942,7 +942,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_msi_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_PDF417 -->
@@ -962,7 +962,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_pdf417_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="2000" />
 		    </PreferenceScreen>
             
             <!-- SYM_POSTNET -->
@@ -973,7 +973,7 @@
 		        <CheckBoxPreference
 		            android:title="@string/sym_check_transmit_enable_title"
 		            android:key="sym_postnet_check_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		    </PreferenceScreen>
             
             <!-- SYM_QR -->
@@ -993,7 +993,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_qr_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="2000" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_RSS -->
@@ -1004,12 +1004,12 @@
 		        <CheckBoxPreference
 		            android:title="@string/sym_rss_rsl_enable_title"
 		            android:key="sym_rss_rsl_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- RSE Enable -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_rss_rse_enable_title"
 		            android:key="sym_rss_rse_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- MinLength -->
 		        <EditTextPreference 
 	                android:title="@string/sym_minlength_title"
@@ -1023,7 +1023,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_rss_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
 		    <!-- SYM_STRT25 -->
@@ -1043,7 +1043,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_strt25_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_TELEPEN -->
@@ -1068,7 +1068,7 @@
 	                android:summary="@string/sym_maxlength_summary"
 	                android:key="sym_telepen_max"
 	                android:inputType="number"
-	                android:defaultValue="1" />
+	                android:defaultValue="80" />
 		    </PreferenceScreen>
 		    
             <!-- SYM_UPCA -->
@@ -1081,14 +1081,14 @@
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
 		            android:key="sym_upca_check_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Num transmit -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_check_transmit_enable_title"
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
 		            android:key="sym_upca_sys_num_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Addenda separator -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_addenda_separator_enable_title"
@@ -1136,14 +1136,14 @@
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
 		            android:key="sym_upce0_check_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Num transmit -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_num_transmit_enable_title"
 		            android:summaryOn="@string/sym_uncheck_to_disable"
 		            android:summaryOff="@string/sym_check_to_enable"
 		            android:key="sym_upce0_sys_num_transmit_enable"
-		            android:defaultValue="false" />
+		            android:defaultValue="true" />
 		        <!-- Addenda separator -->
 		        <CheckBoxPreference
 		            android:title="@string/sym_addenda_separator_enable_title"
@@ -1211,7 +1211,9 @@
             android:defaultValue="false" /> -->
     	
     </PreferenceCategory>
-    
+
+
+
 	<!-- Decoding Preferences -->
    
     <PreferenceCategory android:title="@string/decoding_settings"
@@ -1309,11 +1311,21 @@
 	                -->
 		<ListPreference
 			android:title="@string/decode_time_limit_title"
-			android:summary="3s"
-			android:defaultValue="3000"
+			android:summary="5s"
+			android:defaultValue="5000"
 			android:entries="@array/timeout_config_title"
 			android:entryValues="@array/timeout_config_values"
 			android:key="decode_time_limit"
+			android:negativeButtonText="@null"
+			android:positiveButtonText="@null" />
+
+		<ListPreference
+			android:title="@string/result_char_set"
+			android:summary="utf-8"
+			android:defaultValue="1"
+			android:entries="@array/char_set_title"
+			android:entryValues="@array/char_set"
+			android:key="result_char_set"
 			android:negativeButtonText="@null"
 			android:positiveButtonText="@null" />
 

@@ -30,7 +30,7 @@ public class KeyReceiver extends BroadcastReceiver {
         boolean f5Enable = prefs.getBoolean("key_f5", true);
         boolean f6Enable = prefs.getBoolean("key_f6", true);
         boolean f7Enable = prefs.getBoolean("key_f7", true);
-//        Log.e(TAG, "f1Enable = " + f1Enable  );
+        Log.e(TAG, "isOpen = " + isOpen  );
         if (isOpen) {//软件打开了服务才可以触发扫描
             Intent intentScan = new Intent(context, SotfScanService.class);
 //            intentScan.setAction(SotfScanService.ACTION_SCAN_KEY);

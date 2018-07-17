@@ -8,4 +8,5 @@ public class Barcode {
     public int sn ;
     public String barcode ;
     public int count ;
+    public byte codeID ;
 }

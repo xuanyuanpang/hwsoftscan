@@ -55,6 +55,8 @@
     <string name="sym_check_to_enable">Currently disabled, check to enable</string>
     <string name="scanning_preferences">Scanning Preferences</string>
 
+    <string name="result_char_set">Result char set</string>
+
     <string name="title_lights_config">Lights Configuration</string>
     <string name="title_lights_config_summary">For configuring lights mode</string>
     <string name="key_config">Key Configuration</string>

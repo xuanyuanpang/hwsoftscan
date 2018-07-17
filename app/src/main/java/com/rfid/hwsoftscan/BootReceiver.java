@@ -17,8 +17,8 @@ public class BootReceiver extends BroadcastReceiver{
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isOpen = prefs.getBoolean("switch_scan_service", false);
 //        if (isOpen) {
-//            Intent toServeive = new Intent(context, SotfScanService.class);
-//            context.startService(toServeive);
+//            Intent toService = new Intent(context, SotfScanService.class);
+//            context.startService(toService);
             Intent toServeive = new Intent(context, ConfigActivity.class);
             toServeive.putExtra("isboot", true);
             context.startActivity(toServeive);
